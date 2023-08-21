@@ -1,5 +1,5 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:8525/monitor", { transport: 0 })
+    .withUrl("/monitor")
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
