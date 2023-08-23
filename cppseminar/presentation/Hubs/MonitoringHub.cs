@@ -17,28 +17,20 @@ namespace presentation.Hubs
         public MonitoringHub(MonitoringService monitoringService){
             _monitoringService = monitoringService;
         }
-        // public override Task OnConnectedAsync()
-        // {  
-        //     System.Console.WriteLine("Client connected " + Context.ConnectionId);
-        //     return base.OnConnectedAsync();  
-        // }  
-        // public override async Task OnDisconnectedAsync(Exception? exception)
-        // {
-        //     System.Console.WriteLine("Client disconnected " + Context.ConnectionId);
-        //     await base.OnDisconnectedAsync(exception);
-        // }
         
-        [Authorize(Policy="Student")]
-        public async Task SendMessage(string user, string message)
+        //[Authorize(Policy="Student")]
+        public async Task LogConnection()
         {
-            System.Console.WriteLine();
-            System.Console.WriteLine("SendMessage: " + user + " " + message);
-            System.Console.WriteLine(Context.User.Claims);
-            foreach (Claim claim in Context.User.Claims){
-                System.Console.WriteLine(claim.Type);
-                System.Console.WriteLine(claim.Value);
+            string userEmail = "";
+            foreach (Claim claim in Context.User.Claims) {
+                if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")
+                {
+                    userEmail = claim.Value;
+                    break;
+                }
             }
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            var connectionLog = new ConnectionLog(userEmail, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            _monitoringService.LogConnectionAsync(connectionLog);
         }
 
          [Authorize(Policy="Administrator")]
