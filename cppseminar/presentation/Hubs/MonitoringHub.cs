@@ -6,6 +6,7 @@ using presentation.Services;
 using presentation.Model;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
 
 
 namespace presentation.Hubs
@@ -27,7 +28,7 @@ namespace presentation.Hubs
         //     await base.OnDisconnectedAsync(exception);
         // }
         
-        [Authorize(Policy="Administrator")]
+        [Authorize(Policy="Student")]
         public async Task SendMessage(string user, string message)
         {
             System.Console.WriteLine();
@@ -44,6 +45,8 @@ namespace presentation.Hubs
         public async Task GetConnectedUsersRecentAsync(){
             var response = _monitoringService.GetConnectedUsersRecentAsync();
             System.Console.WriteLine(response);
+            var test = JsonSerializer.Serialize(response);
+            System.Console.WriteLine(test);
             await Clients.Caller.SendAsync("ReceiveUsers", response, "OK");
         }
     }
