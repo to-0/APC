@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+namespace presentation.Model;
 
-
-namespace presentation.Model
+public class ConnectionLog
 {
-    public class ConnectionLog
+    public string? UserEmail { get; set; }
+    public string? Timestamp { get; set; }
+
+    public ConnectionLog(string? email, string? timestamp)
     {
-        public ConnectionLog(string email, string timestamp){
-            UserEmail = email;
-            Timestamp = timestamp;
-        }
-        public ConnectionLog(){
-        }
-        public string UserEmail { get; set; }
-        public string Timestamp { get; set; }
+        UserEmail = email;
+        Timestamp = timestamp;
     }
 }
