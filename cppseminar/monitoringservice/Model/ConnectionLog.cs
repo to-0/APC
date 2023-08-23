@@ -1,13 +1,19 @@
-namespace monitoringservice.Model;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-public class ConnectionLog
+
+namespace monitoringservice.Model
 {
-    public string? UserEmail { get; set; }
-    public string? Timestamp { get; set; }
-
-    public ConnectionLog(string? email, string? timestamp)
+    public class ConnectionLog
     {
-        UserEmail = email;
-        Timestamp = timestamp;
+        public ConnectionLog(string email, string timestamp){
+            UserEmail = email;
+            Timestamp = timestamp;
+        }
+        public ConnectionLog(){
+        }
+        public string UserEmail { get; set; }
+        public string Timestamp { get; set; }
     }
 }
