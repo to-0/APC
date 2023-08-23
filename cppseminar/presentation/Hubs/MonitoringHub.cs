@@ -17,16 +17,6 @@ namespace presentation.Hubs
         public MonitoringHub(MonitoringService monitoringService){
             _monitoringService = monitoringService;
         }
-        // public override Task OnConnectedAsync()
-        // {  
-        //     System.Console.WriteLine("Client connected " + Context.ConnectionId);
-        //     return base.OnConnectedAsync();  
-        // }  
-        // public override async Task OnDisconnectedAsync(Exception? exception)
-        // {
-        //     System.Console.WriteLine("Client disconnected " + Context.ConnectionId);
-        //     await base.OnDisconnectedAsync(exception);
-        // }
         
         [Authorize(Policy="Student")]
         public async Task SendMessage(string user, string message)
@@ -46,8 +36,6 @@ namespace presentation.Hubs
             var response = await _monitoringService.GetConnectedUsersRecentAsync();
             System.Console.WriteLine("Tu je response z monitoring service");
             System.Console.WriteLine(response);
-            // var test = JsonSerializer.Serialize(response);
-            // System.Console.WriteLine(test);
             await Clients.Caller.SendAsync("ReceiveUsers", response, "OK");
         }
     }
