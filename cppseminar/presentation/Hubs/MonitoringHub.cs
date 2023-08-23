@@ -14,17 +14,17 @@ namespace presentation.Hubs
         public MonitoringHub(MonitoringService monitoringService){
             _monitoringService = monitoringService;
         }
-        public override Task OnConnectedAsync()
-        {  
-            System.Console.WriteLine("Client connected " + Context.ConnectionId);
-            return base.OnConnectedAsync();  
-        }  
+        // public override Task OnConnectedAsync()
+        // {  
+        //     System.Console.WriteLine("Client connected " + Context.ConnectionId);
+        //     return base.OnConnectedAsync();  
+        // }  
 
-        public override async Task OnDisconnectedAsync(Exception? exception)
-        {
-            System.Console.WriteLine("Client disconnected " + Context.ConnectionId);
-            await base.OnDisconnectedAsync(exception);
-        }
+        // public override async Task OnDisconnectedAsync(Exception? exception)
+        // {
+        //     System.Console.WriteLine("Client disconnected " + Context.ConnectionId);
+        //     await base.OnDisconnectedAsync(exception);
+        // }
         
         public async Task SendMessage(string user, string message)
         {
@@ -32,8 +32,9 @@ namespace presentation.Hubs
             System.Console.WriteLine("SendMessage: " + user + " " + message);
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-        public async Task GetConnectedUsers(string email){
-            var response = _monitoringService.Test();
+        public async Task GetConnectedUsersRecentAsync(){
+            var response = _monitoringService.GetConnectedUsersRecentAsync();
+            System.Console.WriteLine(response);
             await Clients.Caller.SendAsync("ReceiveUsers", response, "OK");
         }
     }
