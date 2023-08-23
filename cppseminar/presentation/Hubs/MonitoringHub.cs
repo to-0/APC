@@ -30,7 +30,7 @@ namespace presentation.Hubs
                 }
             }
             var connectionLog = new ConnectionLog(userEmail, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            _monitoringService.LogConnectionAsync(connectionLog);
+            await _monitoringService.LogConnectionAsync(connectionLog);
         }
 
          [Authorize(Policy="Administrator")]
@@ -38,7 +38,9 @@ namespace presentation.Hubs
             var response = await _monitoringService.GetConnectedUsersRecentAsync();
             System.Console.WriteLine("Tu je response z monitoring service");
             System.Console.WriteLine(response);
-            await Clients.Caller.SendAsync("ReceiveUsers", response, "OK");
+            var str = await response.Content.ReadAsStringAsync();
+            System.Console.WriteLine(str);
+            await Clients.Caller.SendAsync("ReceiveUsers",str, "OK");
         }
     }
 }
