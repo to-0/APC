@@ -7,8 +7,7 @@ async function start() {
     try {
         await connection.start();
         console.log("SignalR Connected.");
-        setInterval(invokeSendMessage, 10000);
-        //invokeSendMessage();
+        setInterval(invokeSendMessage, 1000);
     }
     catch (err) {
         console.log(err);
@@ -22,11 +21,10 @@ connection.onclose(async () => {
 });
 
 // Define the ReceiveMessage method so that it can be triggered from the Hub
-connection.on("ReceiveUsers", (users, message) => {
+connection.on("ReceiveUsers", (users) => {
     try{
         users = JSON.parse(users);
     console.log(users);
-    console.log(message);
     users.forEach(user => {
         const row = document.getElementById(user.UserEmail)
         const tbl = document.getElementById("userLogs");
@@ -34,7 +32,6 @@ connection.on("ReceiveUsers", (users, message) => {
         console.log("Date now", dateNow);
         const timestamp = new Date(user.Timestamp) 
         if (row === null){
-            console.log("HEre");
             const temp = `<b><tr id=${user.UserEmail}><td>${user.UserEmail}</td><td>${Math.floor((dateNow - timestamp) / 1000)}</td></tr></b>`;
             tbl.innerHTML += temp;
         }
