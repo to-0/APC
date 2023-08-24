@@ -1,6 +1,3 @@
-// setInterval(()=>{
-//     var response = fetch("http://localhost:8080/monitoring/getUsers")
-// },5000)
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/monitor")
     .configureLogging(signalR.LogLevel.Information)
@@ -33,7 +30,8 @@ connection.on("ReceiveUsers", (users, message) => {
     users.forEach(user => {
         const row = document.getElementById(user.UserEmail)
         const tbl = document.getElementById("userLogs");
-        const dateNow = Date.now()
+        const dateNow = new Date();
+        console.log("Date now", dateNow);
         const timestamp = new Date(user.Timestamp) 
         if (row === null){
             console.log("HEre");
