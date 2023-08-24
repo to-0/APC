@@ -19,7 +19,7 @@ namespace presentation.Hubs
             _monitoringService = monitoringService;
         }
         
-        //[Authorize(Policy="Student")]
+        [Authorize]
         public async Task LogConnection()
         {
             string userEmail = "";
