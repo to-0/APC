@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
 using System.Collections.Generic;
 
-
 namespace presentation.Hubs
 {
     public class MonitoringHub: Hub
@@ -33,7 +32,6 @@ namespace presentation.Hubs
             var responseData = await _monitoringService.GetConnectedUsersRecentAsync();
             if (responseData == null)
             {
-                // TODO: invoke some function for admin
                  await Clients.Caller.SendAsync("ErrorGettingUsers", "Monitoring service responded with null");
             }
             else
