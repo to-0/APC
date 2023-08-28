@@ -65,7 +65,7 @@ namespace presentation.Services
             _logger.LogTrace("Requesting submissions from service");
             try
             {
-                HttpResponseMessage message = null; 
+                HttpResponseMessage message = null;
                 if (userEmail == ""){
                     message = await _client.GetAsync($"/submission/count");
                 }

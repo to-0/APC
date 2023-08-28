@@ -45,7 +45,7 @@ else
                     }
                     else{
                         @Model.RemainingRunsList[i]
-                    }           
+                    }
                 </td>
                 <td>
                     <th:form method="post">
@@ -69,6 +69,6 @@ else
 {
     @await Component.InvokeAsync(
         "TestList",
-        new { userEmail = User.GetEmail(), submissionId = Model.MySubmission.Id}) 
+        new { userEmail = User.GetEmail(), submissionId = Model.MySubmission.Id})
 }
 

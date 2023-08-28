@@ -109,7 +109,7 @@ namespace presentation.Services
             catch (Exception e){
                  _logger.LogError("Get test runs failed {e}", e);
                 throw new OperationFailedException();
-            }  
+            }
         }
         public async Task<bool> SetCountedTestRun(string testRunId, bool value){
              testRunId= !string.IsNullOrEmpty(testRunId) ? testRunId : null;
@@ -126,7 +126,7 @@ namespace presentation.Services
              catch (Exception e){
                  _logger.LogError("Get test runs failed {e}", e);
                 throw new OperationFailedException();
-            }  
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace presentation.Pages.Submissions
             {
                 Submissions = await _submissionService.GetUserSubmissionsAsync(User.GetEmail(), PageNumber);
                 if (numberOfPages == -1){
-                    var counts = await _submissionService.GetCounts(User.GetEmail()); 
+                    var counts = await _submissionService.GetCounts(User.GetEmail());
                     numberOfPages = counts[1];
                 }
             }
