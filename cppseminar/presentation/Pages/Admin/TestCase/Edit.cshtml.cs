@@ -28,17 +28,21 @@ namespace presentation.Pages.Admin.TestCase
                 ModelState.AddModelError(string.Empty, "Failed loading data");
             }
         }
-        public async Task<ActionResult> OnPostAsync([FromQuery] string caseId){ 
-            if (!ModelState.IsValid){
+        public async Task<ActionResult> OnPostAsync([FromQuery] string caseId)
+        {
+            if (!ModelState.IsValid)
+            {
                 ModelState.AddModelError(string.Empty, "Model is not valid");
                 return Page();
             }
-            try{
-                // http post resets fields not in form and it ignores bindnever attribute, thats why we call updateTest with caseId from query 
-                await _testCaseService.UpdateTest(caseId, TestCase);
+            try
+            {
+                // http post resets fields not in form and it ignores bindnever attribute, thats why we call updateTest with caseId from query await _testCaseService.UpdateTest(caseId, TestCase);
+                
                 return RedirectToPage("/Admin/TestCase/Index");
             }
-            catch (Exception){
+            catch (Exception)
+            {
                 ModelState.AddModelError(string.Empty, "Failed updating test case");
                 return Page();
             }
